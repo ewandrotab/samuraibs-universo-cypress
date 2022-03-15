@@ -3,6 +3,13 @@
     
     "baseUrl": "http://localhost:3000",
     "viewportWidth": 1440,
-    "viewportHeight": 900
+    "viewportHeight": 900,
+    "dbConfig": {
+        "host": "ziggy.db.elephantsql.com",
+        "user": "wmphdfbi",
+        "password": "RYOYTSQU0L1kHJDr-4MhZh9mBglzj2vY",
+        "database": "wmphdfbi",
+        "port": 5432
+    }
 
 }
