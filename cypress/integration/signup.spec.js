@@ -40,17 +40,7 @@ describe('cadastro', () => {
         }
 
         before(() => {
-            cy.task('removeUser', user.email).then(function (result) {
-                console.log(result)
-            })
-
-            cy.request({
-                url: 'http://localhost:3333/users',
-                method: 'POST',
-                body: user
-            }).then(function (response) {
-                expect(response.status).to.equal(200)
-            })
+            cy.postUser(user)
         });
 
         it('não deve cadastrar o usuário', () => {

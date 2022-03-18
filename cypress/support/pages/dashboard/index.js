@@ -1,13 +1,11 @@
-import {el} from './elements'
+import { el } from './elements'
+import header from '../../components/header'
 
 class DashboardPage {
     
-    shouldLoggedIn(user){
-        cy.url().should('include', '/dashboard')
-        cy.contains('span', 'Bem-vindo').should('be.visible')
-        cy.get(el.linkProfile).should('be.visible')
-        cy.contains('strong', user.name).should('be.visible')
-        
+    constructor() {
+        this.header = header
     }
+    
 }
 export default new DashboardPage()
