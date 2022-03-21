@@ -18,19 +18,10 @@ describe('login', function () {
 
         });
         it('então deve ser logado com sucesso', function () {
-
-            cy.intercept({
-                method: 'GET',
-                path:'/appointments/days'
-            },
-            {
-               statusCode: 200 
-            }).as('getDays')
-            
+                        
             loginPage.go()
             loginPage.form(user)
-            loginPage.submit()
-            cy.wait('@getDays')
+            loginPage.submit()            
             dasboardPage.header.userLoggedIn(user)
 
         });
@@ -38,7 +29,7 @@ describe('login', function () {
 
     context('quando informo a senha incorreta', function () {
 
-        const user = {
+        let user = {
             name: 'Mário Benício Caleb Caldeira',
             email: 'mario.caleb@samuraibs.com',
             password: 'pwd123',
@@ -46,19 +37,17 @@ describe('login', function () {
         }
 
         before(function () {
-            cy.postUser(user)
+            cy.postUser(user).then(function(){
+                user.password = 'abc123'
+            })
+            
 
         });
 
         it('então o usuário não deve ser logado', function () {
-
-            const incorretUser = {
-                email: 'admin2@samuraibs.com',
-                password: 'abc123',
-            }
             
             loginPage.go()
-            loginPage.form(incorretUser)
+            loginPage.form(user)
             loginPage.submit()
             loginPage.toast.shouldHaveText('Ocorreu um erro ao fazer login, verifique suas credenciais.')
 
@@ -68,19 +57,29 @@ describe('login', function () {
 
     context('quando informo um email com formato inválido', function () {
 
-        const user = {
-            name: 'Maria da Paz',
-            email: 'mariapaz.samuraibs.com',
-            password: 'pwd123',
-            is_provider: true
-        }
-        it('deve exibir mensagem de alerta', function () {
+        const emails = [
+            'ewandro.com.br', 'yahoo.com', '@gmail.com', '@', 'ewandro@', '111', '&*^&*^&*^', 'xpto123'
+        ]
+
+        before(function() {
 
             loginPage.go()
-            loginPage.form(user)
-            loginPage.submit()
-            loginPage.alertHaveText('Informe um email válido')
+            
         });
+
+        emails.forEach(function(email){
+
+            it('não deve logar com o email: '+ email, function () {
+
+                const user = {email: email, password: 'pwd123'}
+                
+                loginPage.form(user)
+                loginPage.submit()
+                loginPage.alertHaveText('Informe um email válido')
+            });
+
+        })
+        
     });
 
     context('quando não preencho nenhum dos campos', function () {

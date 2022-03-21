@@ -12,8 +12,15 @@ class LoginPage {
     }
 
     form(user) {
-        cy.get(el.email).should('be.visible').type(user.email)
-        cy.get(el.password).should('be.visible').type(user.password)
+        cy.get(el.email)
+            .should('be.visible')
+            .clear()
+            .type(user.email)
+        
+        cy.get(el.password)
+            .should('be.visible')
+            .clear()
+            .type(user.password)
     }
 
     submit(){
@@ -21,7 +28,7 @@ class LoginPage {
     }    
 
     alertHaveText(expectText){
-        cy.contains('.alert-error', expectText).should('be.visible')
+        cy.contains(el.alertError, expectText).should('be.visible')
     }
 }
 

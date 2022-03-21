@@ -75,7 +75,7 @@ describe('cadastro', () => {
         const passwords = ['1', '1a', '1ab', '1abc', '1abcd']
 
 
-        beforeEach(() => {
+        before(function() {
             signupPage.go()
         });
 
