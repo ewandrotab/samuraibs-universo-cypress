@@ -11,6 +11,7 @@ class ForgotPassPage {
     
     go() {
         cy.visit('/forgot-password')
+        cy.contains(el.title).should('be.visible')
     }
 
     form(email) {
@@ -20,8 +21,7 @@ class ForgotPassPage {
     }
 
     submit() {
-        cy.get(el.forgotButton.locator)
-            .contains(el.forgotButton.text)
+        cy.contains(el.forgotButton.locator, el.forgotButton.text)
             .click()
     }
 }

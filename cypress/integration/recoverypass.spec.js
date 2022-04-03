@@ -24,7 +24,7 @@ describe('resgate de senha', function () {
             forgotPassPage.go()   
             forgotPassPage.form(this.data.email)     
             forgotPassPage.submit()    
-            forgotPassPage.toast.shouldHaveText('Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada.')
+            forgotPassPage.toast.shouldHaveText('Enviamos um e-mail para confirmar a recuperação de senha, cheque sua caixa de entrada.')            
 
         })
     })
