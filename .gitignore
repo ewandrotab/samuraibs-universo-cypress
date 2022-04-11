@@ -1,5 +1,4 @@
 node_modules
-yarn.lock
 cypress/downloads/
 cypress/screenshots/
 cypress/videos/
